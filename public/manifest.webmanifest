@@ -1,0 +1,19 @@
+{
+  "name": "Prode Estrella",
+  "short_name": "Prode",
+  "description": "Prode de futbol argentino entre amigos.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#11251b",
+  "theme_color": "#11251b",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
