@@ -1,6 +1,6 @@
 create extension if not exists "pgcrypto";
 
-create type public.app_role as enum ('participant', 'admin');
+create type public.app_role as enum ('user', 'super_admin');
 create type public.star_status as enum ('draft', 'active', 'finished');
 create type public.round_status as enum ('draft', 'open', 'closed', 'scored');
 create type public.match_status as enum ('scheduled', 'live', 'finished', 'postponed');
@@ -10,18 +10,31 @@ create table public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   full_name text not null,
   nickname text not null,
-  email text not null unique,
-  phone text,
+  email text unique,
+  phone text unique,
+  reminder_channel public.reminder_channel not null default 'email',
   crest_primary text not null default '#7ad45e',
   crest_secondary text not null default '#10251b',
   crest_symbol text not null default 'PE',
   stars_won integer not null default 0 check (stars_won >= 0),
-  role public.app_role not null default 'participant',
+  role public.app_role not null default 'user',
   created_at timestamptz not null default now(),
-  updated_at timestamptz not null default now()
+  updated_at timestamptz not null default now(),
+  constraint profiles_single_contact_check check (
+    (
+      reminder_channel = 'email'
+      and email is not null
+      and phone is null
+    )
+    or (
+      reminder_channel = 'sms'
+      and phone is not null
+      and email is null
+    )
+  )
 );
 
-create or replace function public.is_admin()
+create or replace function public.is_super_admin()
 returns boolean
 language sql
 security definer
@@ -32,8 +45,18 @@ as $$
     select 1
     from public.profiles
     where id = auth.uid()
-      and role = 'admin'
+      and role = 'super_admin'
   );
+$$;
+
+create or replace function public.is_admin()
+returns boolean
+language sql
+security definer
+set search_path = public
+stable
+as $$
+  select public.is_super_admin();
 $$;
 
 create table public.stars (

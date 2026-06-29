@@ -1,21 +1,21 @@
 import type { Match, PredictionOutcome, Score } from "@/lib/domain";
 
 export const outcomeLabels: Record<PredictionOutcome, string> = {
-  full: "Pleno",
-  winner: "Sumo por ganador",
-  draw: "Sumo por empate",
-  miss: "No sumo",
-  empty: "No voto",
+  full: "⭐ Pleno",
+  winner: "✓ Ganador",
+  draw: "✓ Empate",
+  miss: "✕ No sumaste",
+  empty: "Sin votar",
   pending: "Votado",
 };
 
 export const outcomeClasses: Record<PredictionOutcome, string> = {
-  full: "border-transparent bg-[var(--color-prode-pleno)] text-black",
-  winner: "border-transparent bg-[var(--color-prode-winner)] text-black",
-  draw: "border-transparent bg-[var(--color-prode-draw)] text-black",
-  miss: "border-transparent bg-[var(--color-prode-miss)] text-white",
-  empty: "border-border bg-secondary text-muted-foreground",
-  pending: "border-border bg-card text-foreground",
+  full:    "border-amber-500/25 bg-amber-500/12 text-amber-500 dark:text-amber-400",
+  winner:  "border-blue-500/25 bg-blue-500/12 text-blue-600 dark:text-blue-400",
+  draw:    "border-emerald-500/25 bg-emerald-500/12 text-emerald-700 dark:text-emerald-400",
+  miss:    "border-red-500/25 bg-red-500/12 text-red-600 dark:text-red-400",
+  empty:   "border-border bg-secondary text-muted-foreground",
+  pending: "border-border bg-secondary text-foreground",
 };
 
 export function formatScore(score?: Score) {

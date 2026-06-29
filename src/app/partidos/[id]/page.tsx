@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { TeamCrest } from "@/components/dashboard/participant-crest";
 import { OutcomeBadge } from "@/components/dashboard/outcome-badge";
 import { getFootballMatchInsight } from "@/lib/api-football";
+import { requireAuth } from "@/lib/auth/guards";
 import { formatKickoffDetail } from "@/lib/date-format";
 import { findMatchById, rounds } from "@/lib/mock-data";
 import { formatScore, getPredictionOutcome } from "@/lib/scoring";
@@ -35,12 +36,14 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${match.homeTeam.name} vs ${match.awayTeam.name} | Prode Estrella`,
+    title: `${match.homeTeam.name} vs ${match.awayTeam.name} | Prode`,
   };
 }
 
 export default async function MatchPage({ params }: MatchPageProps) {
   const { id } = await params;
+  await requireAuth(`/partidos/${id}`);
+
   const insight = await getFootballMatchInsight(id);
 
   if (!insight) {

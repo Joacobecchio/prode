@@ -6,13 +6,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { OutcomeBadge } from "@/components/dashboard/outcome-badge";
 import { TeamCrest } from "@/components/dashboard/participant-crest";
 import { getFootballRounds, type FootballDataSource } from "@/lib/api-football";
+import { requireAuth } from "@/lib/auth/guards";
 import { formatKickoffNumeric, formatKickoffShort } from "@/lib/date-format";
 import type { Match, MatchStatus, Round } from "@/lib/domain";
+import { currentStar } from "@/lib/mock-data";
 import { formatScore, getPredictionOutcome } from "@/lib/scoring";
 import { cn } from "@/lib/utils";
 
 export const metadata = {
-  title: "Partidos | Prode Estrella",
+  title: "Partidos | Prode",
 };
 
 export const dynamic = "force-dynamic";
@@ -32,6 +34,8 @@ const statusClasses: Record<MatchStatus, string> = {
 };
 
 export default async function MatchesPage() {
+  await requireAuth("/partidos");
+
   const data = await getFootballRounds();
   const { rounds } = data;
   const matches = rounds.flatMap((round) => round.matches);
@@ -45,7 +49,7 @@ export default async function MatchesPage() {
       <header className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-end">
         <div>
           <p className="text-xs uppercase tracking-[0.24em] text-primary">
-            Estrella 8
+            {currentStar.name} · Fechas {currentStar.roundFrom} a {currentStar.roundTo}
           </p>
           <h1 className="mt-1 text-2xl font-semibold tracking-normal">
             Partidos

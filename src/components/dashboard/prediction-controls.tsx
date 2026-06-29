@@ -1,7 +1,6 @@
 "use client";
 
 import { Minus, Plus, RotateCcw } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import type { Score } from "@/lib/domain";
 
 type PredictionControlsProps = {
@@ -17,31 +16,29 @@ export function PredictionControls({
 }: PredictionControlsProps) {
   function nudge(side: keyof Score, delta: number) {
     const base = value ?? { home: 0, away: 0 };
-    onChange({
-      ...base,
-      [side]: Math.max(0, Math.min(20, base[side] + delta)),
-    });
+    onChange({ ...base, [side]: Math.max(0, Math.min(20, base[side] + delta)) });
   }
 
   return (
-    <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2">
-      <ScoreStepper
+    <div className="flex items-center gap-2">
+      <Stepper
         label="Local"
         value={value?.home}
         disabled={disabled}
         onMinus={() => nudge("home", -1)}
         onPlus={() => nudge("home", 1)}
       />
-      <Button
-        variant="ghost"
-        size="icon"
+
+      <button
         disabled={disabled || !value}
-        aria-label="Limpiar pronostico"
+        aria-label="Limpiar pronóstico"
         onClick={() => onChange(undefined)}
+        className="grid h-8 w-8 shrink-0 place-items-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground disabled:pointer-events-none disabled:opacity-30"
       >
-        <RotateCcw className="h-4 w-4" aria-hidden="true" />
-      </Button>
-      <ScoreStepper
+        <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
+      </button>
+
+      <Stepper
         label="Visitante"
         value={value?.away}
         disabled={disabled}
@@ -52,7 +49,7 @@ export function PredictionControls({
   );
 }
 
-function ScoreStepper({
+function Stepper({
   label,
   value,
   disabled,
@@ -66,30 +63,26 @@ function ScoreStepper({
   onPlus: () => void;
 }) {
   return (
-    <div className="grid grid-cols-[2.25rem_1fr_2.25rem] items-center rounded-md border bg-background">
-      <Button
-        variant="ghost"
-        size="icon"
+    <div className="flex flex-1 items-center overflow-hidden rounded-xl border bg-card">
+      <button
         disabled={disabled}
-        className="h-10 w-9 rounded-r-none"
         aria-label={`Restar gol ${label}`}
         onClick={onMinus}
+        className="grid h-10 w-9 shrink-0 place-items-center text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
       >
-        <Minus className="h-4 w-4" aria-hidden="true" />
-      </Button>
-      <div className="text-center font-mono text-lg font-semibold">
-        {value ?? "-"}
+        <Minus className="h-3.5 w-3.5" aria-hidden="true" />
+      </button>
+      <div className="flex-1 text-center font-mono text-lg font-bold tabular-nums">
+        {value ?? <span className="text-muted-foreground">—</span>}
       </div>
-      <Button
-        variant="ghost"
-        size="icon"
+      <button
         disabled={disabled}
-        className="h-10 w-9 rounded-l-none"
         aria-label={`Sumar gol ${label}`}
         onClick={onPlus}
+        className="grid h-10 w-9 shrink-0 place-items-center text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
       >
-        <Plus className="h-4 w-4" aria-hidden="true" />
-      </Button>
+        <Plus className="h-3.5 w-3.5" aria-hidden="true" />
+      </button>
     </div>
   );
 }

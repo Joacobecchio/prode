@@ -1,9 +1,11 @@
 import type { HistoricalStar, Match, Participant, Round, Star, Team } from "@/lib/domain";
 
 export const currentStar: Star = {
-  id: "star-8",
-  number: 8,
-  name: "Estrella 8",
+  id: "star-1",
+  number: 1,
+  name: "Estrella 1",
+  roundFrom: 1,
+  roundTo: 5,
   status: "active",
 };
 

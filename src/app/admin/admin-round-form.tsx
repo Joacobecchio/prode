@@ -21,11 +21,11 @@ export function AdminRoundForm() {
   } = useForm<AdminRoundFormValues>({
     resolver: zodResolver(adminRoundSchema),
     defaultValues: {
-      starId: "star-8",
-      number: 7,
+      starId: "star-1",
+      number: 5,
       competition: "Primera Division",
-      startsAt: "2026-07-11T18:00",
-      closesAt: "2026-07-11T17:45",
+      startsAt: "2026-07-04T18:00",
+      closesAt: "2026-07-04T17:45",
     },
   });
 

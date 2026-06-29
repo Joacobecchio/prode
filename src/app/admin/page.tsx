@@ -9,9 +9,10 @@ import {
 import { AdminRoundForm } from "@/app/admin/admin-round-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { requireSuperAdmin } from "@/lib/auth/guards";
 
 export const metadata = {
-  title: "Admin | Prode Estrella",
+  title: "Admin | Prode",
 };
 
 const adminActions = [
@@ -27,7 +28,7 @@ const adminActions = [
   },
   {
     title: "Recalcular puntajes",
-    description: "Estrella actual",
+    description: "Torneo actual",
     icon: RotateCw,
   },
   {
@@ -47,7 +48,9 @@ const adminActions = [
   },
 ];
 
-export default function AdminPage() {
+export default async function AdminPage() {
+  await requireSuperAdmin("/admin");
+
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_420px]">
       <section className="space-y-4">

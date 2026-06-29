@@ -1,13 +1,16 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ParticipantCrest } from "@/components/dashboard/participant-crest";
+import { requireAuth } from "@/lib/auth/guards";
 import { historicalStars, participants } from "@/lib/mock-data";
 
 export const metadata = {
-  title: "Historial | Prode Estrella",
+  title: "Historial | Prode",
 };
 
-export default function HistoryPage() {
+export default async function HistoryPage() {
+  await requireAuth("/historial");
+
   const historicalRanking = [...participants].sort(
     (a, b) => b.starsWon - a.starsWon || b.points - a.points,
   );

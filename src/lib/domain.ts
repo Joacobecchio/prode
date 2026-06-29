@@ -41,6 +41,8 @@ export type Star = {
   id: string;
   number: number;
   name: string;
+  roundFrom: number;
+  roundTo: number;
   status: "draft" | "active" | "finished";
 };
 

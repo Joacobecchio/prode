@@ -2,44 +2,104 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@theme inline {
-  --font-sans: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", "SFMono-Regular", ui-monospace, monospace;
+/* ─── LIGHT THEME ─────────────────────────────────────────────── */
+:root {
+  --background:             oklch(0.97 0.004 260);
+  --foreground:             oklch(0.13 0.022 260);
+  --card:                   oklch(1.00 0 0);
+  --card-foreground:        oklch(0.13 0.022 260);
+  --popover:                oklch(1.00 0 0);
+  --popover-foreground:     oklch(0.13 0.022 260);
+  --primary:                oklch(0.76 0.17 78);
+  --primary-foreground:     oklch(0.12 0.04 78);
+  --secondary:              oklch(0.93 0.006 260);
+  --secondary-foreground:   oklch(0.25 0.022 260);
+  --muted:                  oklch(0.93 0.006 260);
+  --muted-foreground:       oklch(0.52 0.018 260);
+  --accent:                 oklch(0.56 0.14 250);
+  --accent-foreground:      oklch(0.97 0.008 260);
+  --destructive:            oklch(0.58 0.22 28);
+  --destructive-foreground: oklch(0.98 0.01 60);
+  --border:                 oklch(0.88 0.008 260);
+  --input:                  oklch(0.88 0.008 260);
+  --ring:                   oklch(0.76 0.17 78);
 
-  --color-background: oklch(0.135 0.025 160);
-  --color-foreground: oklch(0.97 0.018 95);
-  --color-card: oklch(0.18 0.025 160);
-  --color-card-foreground: oklch(0.97 0.018 95);
-  --color-popover: oklch(0.18 0.025 160);
-  --color-popover-foreground: oklch(0.97 0.018 95);
-  --color-primary: oklch(0.79 0.16 148);
-  --color-primary-foreground: oklch(0.12 0.03 160);
-  --color-secondary: oklch(0.26 0.035 170);
-  --color-secondary-foreground: oklch(0.95 0.018 95);
-  --color-muted: oklch(0.25 0.03 170);
-  --color-muted-foreground: oklch(0.72 0.025 95);
-  --color-accent: oklch(0.66 0.13 205);
-  --color-accent-foreground: oklch(0.12 0.03 160);
-  --color-destructive: oklch(0.65 0.21 28);
-  --color-destructive-foreground: oklch(0.98 0.01 95);
-  --color-border: oklch(0.3 0.04 165);
-  --color-input: oklch(0.28 0.035 165);
-  --color-ring: oklch(0.79 0.16 148);
-
-  --color-prode-pleno: oklch(0.78 0.19 145);
-  --color-prode-winner: oklch(0.72 0.15 205);
-  --color-prode-draw: oklch(0.82 0.16 82);
-  --color-prode-miss: oklch(0.67 0.2 28);
-  --color-prode-empty: oklch(0.72 0.02 95);
-
-  --radius: 0.5rem;
-  --radius-xs: calc(var(--radius) * 0.5);
-  --radius-sm: calc(var(--radius) * 0.75);
-  --radius-md: calc(var(--radius) * 0.875);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.5);
+  --prode-pleno:   oklch(0.76 0.17 78);
+  --prode-winner:  oklch(0.56 0.14 250);
+  --prode-draw:    oklch(0.52 0.18 160);
+  --prode-miss:    oklch(0.58 0.22 28);
+  --prode-empty:   oklch(0.68 0.008 260);
 }
 
+/* ─── DARK THEME ──────────────────────────────────────────────── */
+.dark {
+  --background:             oklch(0.09 0.018 265);
+  --foreground:             oklch(0.94 0.008 265);
+  --card:                   oklch(0.13 0.020 265);
+  --card-foreground:        oklch(0.94 0.008 265);
+  --popover:                oklch(0.13 0.020 265);
+  --popover-foreground:     oklch(0.94 0.008 265);
+  --primary:                oklch(0.78 0.17 78);
+  --primary-foreground:     oklch(0.10 0.04 78);
+  --secondary:              oklch(0.17 0.020 265);
+  --secondary-foreground:   oklch(0.84 0.010 265);
+  --muted:                  oklch(0.17 0.020 265);
+  --muted-foreground:       oklch(0.58 0.016 265);
+  --accent:                 oklch(0.58 0.13 250);
+  --accent-foreground:      oklch(0.09 0.012 265);
+  --destructive:            oklch(0.58 0.22 28);
+  --destructive-foreground: oklch(0.97 0.01 60);
+  --border:                 oklch(0.20 0.018 265);
+  --input:                  oklch(0.20 0.018 265);
+  --ring:                   oklch(0.78 0.17 78);
+
+  --prode-pleno:   oklch(0.78 0.17 78);
+  --prode-winner:  oklch(0.60 0.14 250);
+  --prode-draw:    oklch(0.55 0.18 160);
+  --prode-miss:    oklch(0.58 0.22 28);
+  --prode-empty:   oklch(0.55 0.010 265);
+}
+
+/* ─── THEME MAPPING ───────────────────────────────────────────── */
+@theme inline {
+  --font-sans: "Inter", "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", "SFMono-Regular", ui-monospace, monospace;
+
+  --color-background:             var(--background);
+  --color-foreground:             var(--foreground);
+  --color-card:                   var(--card);
+  --color-card-foreground:        var(--card-foreground);
+  --color-popover:                var(--popover);
+  --color-popover-foreground:     var(--popover-foreground);
+  --color-primary:                var(--primary);
+  --color-primary-foreground:     var(--primary-foreground);
+  --color-secondary:              var(--secondary);
+  --color-secondary-foreground:   var(--secondary-foreground);
+  --color-muted:                  var(--muted);
+  --color-muted-foreground:       var(--muted-foreground);
+  --color-accent:                 var(--accent);
+  --color-accent-foreground:      var(--accent-foreground);
+  --color-destructive:            var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border:                 var(--border);
+  --color-input:                  var(--input);
+  --color-ring:                   var(--ring);
+
+  --color-prode-pleno:  var(--prode-pleno);
+  --color-prode-winner: var(--prode-winner);
+  --color-prode-draw:   var(--prode-draw);
+  --color-prode-miss:   var(--prode-miss);
+  --color-prode-empty:  var(--prode-empty);
+
+  --radius:    0.625rem;
+  --radius-xs: calc(var(--radius) * 0.5);
+  --radius-sm: calc(var(--radius) * 0.75);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) * 1.4);
+  --radius-xl: calc(var(--radius) * 2);
+}
+
+/* ─── BASE ────────────────────────────────────────────────────── */
 * {
   border-color: var(--color-border);
 }
@@ -51,22 +111,18 @@ html {
 
 body {
   min-height: 100vh;
-  background:
-    linear-gradient(180deg, oklch(0.17 0.035 160), oklch(0.11 0.028 150)),
-    repeating-linear-gradient(
-      90deg,
-      rgb(255 255 255 / 0.035) 0,
-      rgb(255 255 255 / 0.035) 1px,
-      transparent 1px,
-      transparent 72px
-    );
+  background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
-button,
-a,
-input {
+html.dark body {
+  background:
+    linear-gradient(160deg, oklch(0.12 0.024 265) 0%, oklch(0.08 0.016 258) 100%);
+}
+
+button, a, input {
   -webkit-tap-highlight-color: transparent;
 }

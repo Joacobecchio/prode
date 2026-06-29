@@ -172,7 +172,7 @@ const DEFAULT_THESPORTSDB_BASE_URL = "https://www.thesportsdb.com/api/v1/json";
 const DEFAULT_THESPORTSDB_API_KEY = "123";
 const DEFAULT_THESPORTSDB_LEAGUE_ID = 4406;
 const DEFAULT_THESPORTSDB_ROUND_FROM = 1;
-const DEFAULT_THESPORTSDB_ROUND_TO = 16;
+const DEFAULT_THESPORTSDB_ROUND_TO = 5;
 
 const apiCache = new Map<string, ApiCacheEntry>();
 
